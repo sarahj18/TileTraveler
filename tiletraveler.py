@@ -6,16 +6,18 @@ tile = '1,1' # always begin at tile [1,1]
 
 def directions_allowed(tile):
     '''checks which tile player is at and prints out available directions'''
-    if tile == '1,1' or '2,1':
+    if tile == '1,1' or tile == '2,1':
         print('You can travel: (N)orth.')
-    if tile == '1,3':
+    elif tile == '1,3':
         print('You can travel: (E)ast or (S)outh.')
-    if tile == '1,2' or '3,2':
-        print('You can travel: (N)orth or (S)outh.')
-    if tile == '2,3':
+    elif tile == '1,2':
+        print('You can travel: (N)orth or (E)ast or (S)outh.')
+    elif tile == '2,3':
         print('You can travel: (E)ast or (W)est.')
-    if tile == '2,2' or '3,3':
+    elif tile == '2,2' or tile == '3,3':
         print('You can travel: (S)outh or (W)est.')
+    elif tile == '3,2':
+        print('You can travel: (N)orth or (S)outh.')
 
 def north(tile):
     if tile == '1,1':
@@ -37,7 +39,7 @@ def south(tile):
         tile = '1,1'
     elif tile == '3,3':
         tile = '3,2'
-    elif == '3,2':
+    elif tile == '3,2':
         tile = '3,1'
     elif tile == '2,2':
         tile = '2,1'
@@ -69,20 +71,15 @@ def west(tile):
 
 
 while tile != '3,1':
-    directions(tile)
-    choose_direction = input('Direction: ').upper()
+    directions = directions_allowed(tile)
+    direction = input('Direction: ').upper()
     if direction == 'N':
-        north(tile)
+        tile = north(tile)
     elif direction == 'S':
-        south(tile)
+        tile = south(tile)
     elif direction == 'E':
-        east(tile)
+        tile = east(tile)
     elif direction == 'W':
-        west(tile)
-
-    
-
-# (1,1)
-# N 
-# (1,2)
-# 
+        tile = west(tile)
+else:
+    print('Victory!')
